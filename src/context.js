@@ -6,25 +6,28 @@ export const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
     // Global state
-    const [name, setName] = useState('Edan');
-    const [shoppingList, setShoppingList] = useState([
-        'Milk',
-        'Eggs',
-        'Bananas'
-    ]);
+    const [todos, setTodos] = useState([]);
 
     // Fetching server data can go in here, too
-    const fetchShoppingList = async () => {
-        const res = await axios.get('https://jsonplaceholder.typicode.com/todos');
-        let items = res.data.map(item => item.title);
-        setShoppingList(items);
+    const fetchTodos = async () => {
+        const res = await axios.get('/api/todos');
+        setTodos(res.data);
     };
+
+    const createTodo = async (title) => {
+        const data = { title };
+        const res = await axios.post('/api/todos', data);
+        console.log('res', res)
+        fetchTodos();
+    }
 
     // There are all the values that will be made available
     // from `useContext(GlobalContext)`
     const state = {
-        name, setName,
-        shoppingList, setShoppingList, fetchShoppingList
+        todos,
+        setTodos,
+        fetchTodos,
+        createTodo
     }
 
     // Log state changes, similar to redux-logger
