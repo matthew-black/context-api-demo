@@ -19,6 +19,7 @@ app.get('/api/todos', (req, res) => {
 app.post('/api/todos', (req, res) => {
     const todo = req.body;
     todo.id = todos.length + 1;
+    todo.completed = false;
     todos.push(todo);
     res.sendStatus(201);
 })
