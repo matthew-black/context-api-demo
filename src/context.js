@@ -4,6 +4,7 @@ import * as Diff from 'diff';
 export const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
+    // Global state
     const [name, setName] = useState('Edan');
     const [shoppingList, setShoppingList] = useState([
         'Milk',
@@ -11,6 +12,8 @@ export function GlobalProvider({ children }) {
         'Bananas'
     ]);
 
+    // There are all the values that will be made available
+    // from `useContext(GlobalContext)`
     const state = {
         name, setName,
         shoppingList, setShoppingList
@@ -18,7 +21,6 @@ export function GlobalProvider({ children }) {
 
     // For logging only
     const prevState = usePrevious(state);
-
     useEffect(() => {
         // Log previous and next state
         console.log('%cprev state', 'color: grey; font-weight: bold', objWithoutFns(prevState));
@@ -39,7 +41,9 @@ export function useGlobalContext() {
     return useContext(GlobalContext);
 }
 
-// For logging only
+// Helps us remember our previous state,
+// so we can log it.
+// Not required for everything else to work
 // https://blog.logrocket.com/how-to-get-previous-props-state-with-react-hooks/
 function usePrevious(value) {
     const ref = useRef();
