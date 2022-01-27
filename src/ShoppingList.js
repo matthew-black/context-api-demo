@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { GlobalContext } from "./context";
 
 function ShoppingList() {
-    const { shoppingList, name } = useContext(GlobalContext);
+    const { shoppingList, fetchShoppingList, name } = useContext(GlobalContext);
 
     return (
         <>
@@ -12,6 +12,10 @@ function ShoppingList() {
                     <li key={i}>{item}</li>
                 ))}
             </ul>
+
+            <button onClick={fetchShoppingList}>
+                Fetch Shopping List
+            </button>
         </>
     )
 }
