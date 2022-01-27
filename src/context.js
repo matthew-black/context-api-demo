@@ -19,7 +19,8 @@ export function GlobalProvider({ children }) {
         shoppingList, setShoppingList
     }
 
-    // Log state changes
+    // Log state changes, similar to redux-logger
+    // Not necessary for this to work, but it's nice
     useStateLogger(state);
 
     return (
