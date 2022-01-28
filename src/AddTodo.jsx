@@ -1,29 +1,29 @@
 import { useContext, useState } from "react";
-import { GlobalContext } from "./context";
+import { GlobalContext } from "./globalContext";
 
 function AddItem() {
-    const [todo, setTodo] = useState('');
-    const { createTodo } = useContext(GlobalContext);
+  const [todo, setTodo] = useState('');
+  const { createTodo } = useContext(GlobalContext);
 
-    const onAddTodo = (evt) => {
-        evt.preventDefault();
+  const onAddTodo = (e) => {
+    e.preventDefault();
 
-        createTodo(todo);
-        
-        setTodo('');
-    }
+    createTodo(todo);
+    
+    setTodo('');
+  }
 
     return (
-        <>
-            <form onSubmit={onAddTodo}>
-                <label>Add Todo</label>
-                <input
-                    value={todo}
-                    onChange={e => setTodo(e.target.value)}
-                />
-                <button>Submit</button>
-            </form>
-        </>
+      <>
+        <form onSubmit={onAddTodo}>
+          <label>Add Todo</label>
+          <input
+            value={todo}
+            onChange={(e) => setTodo(e.target.value)}
+          />
+          <button>Submit</button>
+        </form>
+      </>
     )
 }
 
